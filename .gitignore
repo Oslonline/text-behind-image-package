@@ -1,0 +1,11 @@
+node_modules
+test/
+*.log
+dist/
+.env
+*.tmp
+.idea/
+.vscode/
+.DS_Store
+npm-debug.log*
+package-lock.json
