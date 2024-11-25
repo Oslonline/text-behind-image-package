@@ -157,6 +157,16 @@ Processes an image by applying a text-behind-image effect.
 
 - A `Promise<string>`: A Data URL of the final image with the text-behind effect applied.
 
+## Performance
+
+The performance considerations mentioned here are primarily related to the `@imgly/background-removal` package, which is used within this project. Most prominently, ensure that `SharedArrayBuffer` is available ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)). Due to the security requirements of `SharedArrayBuffer`, two headers need to be set to cross-origin isolate your site:
+
+- `'Cross-Origin-Opener-Policy': 'same-origin'`
+- `'Cross-Origin-Embedder-Policy': 'require-corp'`
+
+For further optimization techniques, you can refer to the performance section of the [@imgly/background-removal](https://www.npmjs.com/package/@imgly/background-removal) package.
+If you have a well-considered alternative or enhancement that can improve speed or performance, we encourage you to open an issue or submit a pull request.
+
 ## Requirements
 
 To use `text-behind-image`, ensure your environment meets the following requirements:
