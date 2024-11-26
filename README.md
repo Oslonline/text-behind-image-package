@@ -3,6 +3,8 @@
 A framework-agnostic package to display the **text-behind-image** effect in any web application.  
 Inspired by the work of [Rexan Wong](https://x.com/rexan_wong) and developed to be easily integrated directly into your projects.
 
+<br>
+
 ## Installation
 
 You can install the package using npm:
@@ -10,6 +12,8 @@ You can install the package using npm:
 ```bash
 npm install text-behind-image
 ```
+
+<br>
 
 ## Usage
 
@@ -157,6 +161,8 @@ Processes an image by applying a text-behind-image effect.
 
 - A `Promise<string>`: A Data URL of the final image with the text-behind effect applied.
 
+<br>
+
 ## Performance
 
 The performance considerations mentioned here are primarily related to the `@imgly/background-removal` package, which is used within this project. Most prominently, ensure that `SharedArrayBuffer` is available ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)). Due to the security requirements of `SharedArrayBuffer`, two headers need to be set to cross-origin isolate your site:
@@ -166,6 +172,8 @@ The performance considerations mentioned here are primarily related to the `@img
 
 For further optimization techniques, you can refer to the performance section of the [@imgly/background-removal](https://www.npmjs.com/package/@imgly/background-removal) package.
 If you have a well-considered alternative or enhancement that can improve speed or performance, we encourage you to open an issue or submit a pull request.
+
+<br>
 
 ## Requirements
 
@@ -196,6 +204,8 @@ The `canvas` package may require additional system-level libraries to be install
   ```
 - **Windows**: Install the following libraries:
   Install Windows Build Tools and libraries required for canvas. Refer to the canvas [installation guide](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows) for detailed instructions.
+
+<br>
 
 ## Contribute
 
