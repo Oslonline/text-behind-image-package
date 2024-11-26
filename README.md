@@ -1,4 +1,13 @@
-# Text-behind-image npm package
+<p align="center">
+  <a href="https://www.npmjs.com/package/text-behind-image">
+    <img src="https://img.shields.io/npm/dm/text-behind-image?label=Downloads&color=blue&style=flat" alt="Downloads" />
+  </a>
+  <a href="https://www.npmjs.com/package/text-behind-image">
+    <img src="https://img.shields.io/npm/v/text-behind-image?label=npm&color=green&style=flat" alt="Version" />
+  </a>
+</p>
+
+# Text-behind-image package
 
 A framework-agnostic package to display the **text-behind-image** effect in any web application.  
 Inspired by the work of [Rexan Wong](https://x.com/rexan_wong) and developed to be easily integrated directly into your projects.
