@@ -1,11 +1,14 @@
-<p align="center">
-  <a href="https://www.npmjs.com/package/text-behind-image">
-    <img src="https://img.shields.io/npm/dm/text-behind-image?label=Downloads&color=blue&style=flat" alt="Downloads" />
-  </a>
-  <a href="https://www.npmjs.com/package/text-behind-image">
-    <img src="https://img.shields.io/npm/v/text-behind-image?label=npm&color=green&style=flat" alt="Version" />
-  </a>
-</p>
+<div align="center">
+  <img width="70%" src="https://i.ibb.co/dcQkddx/GYo-CIJaas-AE5-QV7.jpg" alt="Downloads" />
+  <p align="center">
+    <a href="https://www.npmjs.com/package/text-behind-image">
+      <img src="https://img.shields.io/npm/dm/text-behind-image?label=Downloads&color=blue&style=flat" alt="Downloads" />
+    </a>
+    <a href="https://www.npmjs.com/package/text-behind-image">
+      <img src="https://img.shields.io/npm/v/text-behind-image?label=npm&color=green&style=flat" alt="Version" />
+    </a>
+  </p>
+</div>
 
 # Text-behind-image package
 
@@ -221,8 +224,8 @@ The `canvas` package may require additional system-level libraries to be install
 If you want to contribute to this project, feel free to open an issue or fork this repository & open a pull request.  
 While there are no strict contributing guidelines at the moment, please ensure the following:
 
-- **Testing**: Test all changes you make to ensure the functionality remains intact.  
-- **Code Style**: Follow the existing code style and structure where possible.  
+- **Testing**: Test all changes you make to ensure the functionality remains intact.
+- **Code Style**: Follow the existing code style and structure where possible.
 - **Documentation**: Provide detailed explanations of your changes, including examples when applicable.
 
 We appreciate all contributions that help make this package better!
