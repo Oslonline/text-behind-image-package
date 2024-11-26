@@ -13,7 +13,7 @@
   "description": "Text-Behind-Image: A framework-agnostic npm package for applying the text-behind-image effect in web apps, compatible with React, Vue, Svelte and other modern frameworks. Inspired by the work of Rexan Wong.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Oslonline/text-behind-image-package.git"
+    "url": "https://github.com/Oslonline/text-behind-image-package.git"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
