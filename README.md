@@ -12,53 +12,83 @@
 
 # Text-behind-image package
 
-A framework-agnostic package to display the **text-behind-image** effect in any web application.  
-Inspired by the work of [Rexan Wong](https://x.com/rexan_wong) and developed to be easily integrated directly into your projects.
+A **framework-agnostic** package to display the text-behind-image effect in any web application or Node.js script. Inspired by the work of [Rexan Wong](https://x.com/rexan_wong) and developed to be easily integrated directly into your projects.
 
-<br>
+---
 
 ## Installation
-
-You can install the package using npm:
 
 ```bash
 npm install text-behind-image
 ```
 
-<br>
+---
 
 ## Usage
 
-This package provides a single core function, `TextBehindImage`, which takes an image URL, text settings, and a result image format to apply the text-behind-image effect. You can use it with React, Vue, Svelte or almost any other modern frameworks.
+This package provides a single core function, `TextBehindImage`, which takes an image (URL, File, or Blob), advanced text settings (single or multiple layers), and a result image format/output type to apply the text-behind-image effect.
 
-#### 1. Usage with React example
+**Framework-agnostic:** Works in any environment that supports the HTML Canvas API (browsers, Electron, Node.js with `canvas`).
 
-```javascript
+### Basic Example
+
+```js
+import { TextBehindImage } from "text-behind-image";
+
+const result = await TextBehindImage({
+  image: fileOrUrl, // string | File | Blob
+  textSettings: [
+    {
+      font: "Arial",
+      fontSize: 48,
+      color: "white",
+      content: "Sample Text",
+      position: { x: 100, y: 100 },
+      alignment: "center",
+      rotation: 0,
+      shadowColor: "#000",
+      shadowBlur: 10,
+      shadowOffsetX: 0,
+      shadowOffsetY: 0,
+      strokeColor: "#fff",
+      strokeWidth: 2,
+      opacity: 0.9,
+      letterSpacing: 2,
+      lineHeight: 1.5,
+    },
+    // ...more layers
+  ],
+  format: "png",
+  outputType: "dataUrl", // or 'blob' | 'file'
+  bgRemovalOptions: { /* options for background removal */ },
+});
+```
+
+---
+
+## Usage in Frameworks
+
+### React
+```jsx
 import React, { useState } from "react";
 import { TextBehindImage } from "text-behind-image";
 
 const App = () => {
   const [imageUrl, setImageUrl] = useState("");
-
   const generateImage = async () => {
-    try {
-      const result = await TextBehindImage({
-        imageUrl: "https://example.com/image.png",
-        textSettings: {
-          font: "Arial",
-          fontSize: 48,
-          color: "white",
-          content: "Sample Text",
-          position: { x: 100, y: 100 },
-        },
-        format: "png",
-      });
-      setImageUrl(result);
-    } catch (error) {
-      console.error("Error generating image:", error);
-    }
+    const result = await TextBehindImage({
+      image: "https://example.com/image.png",
+      textSettings: {
+        font: "Arial",
+        fontSize: 48,
+        color: "white",
+        content: "Sample Text",
+        position: { x: 100, y: 100 },
+      },
+      format: "png",
+    });
+    setImageUrl(result);
   };
-
   return (
     <div>
       <button onClick={generateImage}>Generate Image</button>
@@ -66,167 +96,134 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
 ```
 
-<br>
-
-#### 2. Usage with Vue 3
-
-```javascript
+### Vue 3
+```vue
 <template>
   <div>
     <button @click="processImage">Generate Image</button>
     <img v-if="imageUrl" :src="imageUrl" alt="Generated" />
   </div>
 </template>
-
-<script>
-import { TextBehindImage } from "text-behind-image";
-
-export default {
-  data() {
-    return {
-      imageUrl: "",
-    };
-  },
-  methods: {
-    async processImage() {
-      try {
-        const result = await TextBehindImage({
-          imageUrl: "https://example.com/image.png",
-          textSettings: {
-            font: "Arial",
-            fontSize: 48,
-            color: "white",
-            content: "Sample Text",
-            position: { x: 100, y: 100 },
-          },
-          format: "png",
-        });
-        this.imageUrl = result;
-      } catch (error) {
-        console.error("Error generating image:", error);
-      }
+<script setup>
+import { ref } from 'vue';
+import { TextBehindImage } from 'text-behind-image';
+const imageUrl = ref('');
+async function processImage() {
+  const result = await TextBehindImage({
+    image: 'https://example.com/image.png',
+    textSettings: {
+      font: 'Arial',
+      fontSize: 48,
+      color: 'white',
+      content: 'Sample Text',
+      position: { x: 100, y: 100 },
     },
-  },
-};
+    format: 'png',
+  });
+  imageUrl.value = result;
+}
 </script>
 ```
 
-#### 3. Usage with Svelte
-
-```javascript
+### Svelte
+```svelte
 <script>
   import { TextBehindImage } from 'text-behind-image';
   let imageUrl = '';
-
   async function generateImage() {
-    try {
-      const result = await TextBehindImage({
-        imageUrl: 'https://example.com/image.png',
-        textSettings: {
-          font: 'Arial',
-          fontSize: 48,
-          color: 'white',
-          content: 'Sample Text',
-          position: { x: 100, y: 100 },
-        },
-        format: 'png',
-      });
-      imageUrl = result;
-    } catch (error) {
-      console.error('Error generating image:', error);
-    }
+    const result = await TextBehindImage({
+      image: 'https://example.com/image.png',
+      textSettings: {
+        font: 'Arial',
+        fontSize: 48,
+        color: 'white',
+        content: 'Sample Text',
+        position: { x: 100, y: 100 },
+      },
+      format: 'png',
+    });
+    imageUrl = result;
   }
 </script>
-
 <button on:click={generateImage}>Generate Image</button>
 {#if imageUrl}
   <img src={imageUrl} alt="Generated" />
 {/if}
 ```
 
-<br>
+---
 
-## Props Reference
+## API Reference
 
 ### `TextBehindImage`
 
 Processes an image by applying a text-behind-image effect.
 
-#### **Parameters**
+#### Parameters
+- `image` (string | File | Blob): The image to process (URL, File, or Blob).
+- `textSettings` (object | object[]): Settings for one or more text layers. Each object supports:
+  - `font` (string): Font family
+  - `fontSize` (number): Font size
+  - `color` (string): Text color
+  - `content` (string): Text content
+  - `position` (object): `{ x: number, y: number }`
+  - `alignment` (CanvasTextAlign): Text alignment
+  - `rotation` (number): Rotation in degrees
+  - `shadowColor`, `shadowBlur`, `shadowOffsetX`, `shadowOffsetY`
+  - `strokeColor`, `strokeWidth`
+  - `opacity` (number): 0-1
+  - `letterSpacing` (number)
+  - `lineHeight` (number)
+- `format` (string): Output format ('png', 'jpg', 'webp')
+- `outputType` (string): 'dataUrl' (default), 'blob', or 'file'
+- `bgRemovalOptions` (object): Options for background removal (see @imgly/background-removal)
 
-- `imageUrl` (string): The URL of the image to process.
-- `textSettings` (object, optional): Settings for the text to be applied. Defaults are provided for each property.
-  - `font` (string, optional): The font family of the text. Default is 'Arial'.
-  - `fontSize` (number, optional): The size of the text font. Default is 20.
-  - `color` (string, optional): The color of the text. Default is 'black'.
-  - `content` (string, optional): The text content to display. Default is an empty string.
-  - `position` (object, optional): The position of the text on the image. Default is { x: 0, y: 0 }.
-    - `x` (number, optional): The x-coordinate for the text position.
-    - `y` (number, optional): The y-coordinate for the text position.
-- `format` (string): The format of the resulting image (e.g., 'png', 'jpg', 'webp').
+#### Returns
+- A `Promise<string | Blob | File>`: The final image as a Data URL, Blob, or File.
 
-#### **Returns**
+---
 
-- A `Promise<string>`: A Data URL of the final image with the text-behind effect applied.
+## Browser & Node.js Support
+- **Browser:** Works in all modern browsers with Canvas support. For background removal, your site must be cross-origin isolated (see [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)).
+- **Node.js:** Works with Node.js v14+ and the [`canvas`](https://www.npmjs.com/package/canvas) package. See system dependencies below.
 
-<br>
+---
 
-## Performance
+## Demo App
+A full-featured demo app is available in the `text-behind-image-demo` folder for local testing. It supports all features, including multiple text layers, advanced settings, and background removal.
 
-The performance considerations mentioned here are primarily related to the `@imgly/background-removal` package, which is used within this project. Most prominently, ensure that `SharedArrayBuffer` is available ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)). Due to the security requirements of `SharedArrayBuffer`, two headers need to be set to cross-origin isolate your site:
-
-- `'Cross-Origin-Opener-Policy': 'same-origin'`
-- `'Cross-Origin-Embedder-Policy': 'require-corp'`
-
-For further optimization techniques, you can refer to the performance section of the [@imgly/background-removal](https://www.npmjs.com/package/@imgly/background-removal) package.
-If you have a well-considered alternative or enhancement that can improve speed or performance, we encourage you to open an issue or submit a pull request.
-
-<br>
+---
 
 ## Requirements
 
-To use `text-behind-image`, ensure your environment meets the following requirements:
-
 ### Node.js
-
-- **Version**: Node.js v14.0.0 or higher is recommended for compatibility with ES modules and the `canvas` package.
+- **Version:** Node.js v14.0.0 or higher is recommended for compatibility with ES modules and the `canvas` package.
 
 ### Additional Libraries
-
-The package has the following dependencies:
-
 - [`canvas`](https://www.npmjs.com/package/canvas): Used for rendering images and text.
 - [`@imgly/background-removal`](https://www.npmjs.com/package/@imgly/background-removal): For background removal functionality.
 
 ### System Dependencies
-
-The `canvas` package may require additional system-level libraries to be installed, if needed install them with:
-
-- **Linux**: Install the following libraries:
+- **Linux:**
   ```bash
   sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
   ```
-- **MacOS**: Install the following libraries:
+- **MacOS:**
   ```bash
   brew install pkg-config cairo pango libpng jpeg giflib librsvg
   ```
-- **Windows**: Install the following libraries:
+- **Windows:**
   Install Windows Build Tools and libraries required for canvas. Refer to the canvas [installation guide](https://github.com/Automattic/node-canvas/wiki/Installation:-Windows) for detailed instructions.
 
-<br>
+---
 
 ## Contribute
-
-If you want to contribute to this project, feel free to open an issue or fork this repository & open a pull request.  
-While there are no strict contributing guidelines at the moment, please ensure the following:
-
-- **Testing**: Test all changes you make to ensure the functionality remains intact.
-- **Code Style**: Follow the existing code style and structure where possible.
-- **Documentation**: Provide detailed explanations of your changes, including examples when applicable.
+If you want to contribute to this project, feel free to open an issue or fork this repository & open a pull request. Please:
+- **Test** all changes you make to ensure the functionality remains intact.
+- **Follow** the existing code style and structure where possible.
+- **Document** your changes, including examples when applicable.
 
 We appreciate all contributions that help make this package better!
 
