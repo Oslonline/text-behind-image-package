@@ -4,10 +4,11 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "git push && npm version minor && git push --follow-tags && npm publish"
   },
   "homepage": "https://github.com/Oslonline/text-behind-image-package",
-  "keywords": ["react", "vue", "svelte", "rexan wong", "text behind image", "text-behind-image", "text behind image react", "text behind image vue", "text behind image svelte", "framework-agnostic", "frontend design", "rexan wong"], 
+  "keywords": ["react", "vue", "svelte", "rexan wong", "text behind image", "text-behind-image", "text behind image react", "text behind image vue", "text behind image svelte", "framework-agnostic", "frontend design"], 
   "author": "Oslo418",
   "license": "AGPL-3.0",
   "description": "Text-Behind-Image: A framework-agnostic npm package for applying the text-behind-image effect in web apps, compatible with React, Vue, Svelte and other modern frameworks. Inspired by the work of Rexan Wong.",
