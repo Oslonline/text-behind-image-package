@@ -189,12 +189,6 @@ Processes an image by applying a text-behind-image effect.
 - **Browser:** Works in all modern browsers with Canvas support. For background removal, your site must be cross-origin isolated (see [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)).
 - **Node.js:** Works with Node.js v14+ and the [`canvas`](https://www.npmjs.com/package/canvas) package. See system dependencies below.
 
----
-
-## Demo App
-A full-featured demo app is available in the `text-behind-image-demo` folder for local testing. It supports all features, including multiple text layers, advanced settings, and background removal.
-
----
 
 ## Requirements
 
